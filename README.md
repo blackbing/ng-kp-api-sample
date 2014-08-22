@@ -8,12 +8,10 @@
 
 由於 [柯文哲野生官網](http://unlimited.kptaipei.tw/) 所提供的 API 使用範例主要以 jQuery 為主，我將其修改為以 ReactJS 版本的 API 呼叫範例，供 ReactJS 初學者研習之用。
 
-使用方式
+申請 API key
 ---------
 
-* 本專案每一份 html 檔案中，都有個 API_KEY 變數，請先到 [柯文哲野生官網](http://unlimited.kptaipei.tw/) 申請 API key 之後，將該變數的值置換成你自己的 API key 即可。如下圖示：
-	
-	![image](https://cloud.githubusercontent.com/assets/88981/3997760/feae7da2-2941-11e4-9131-1e8d0341a1c8.png)
+* 請到 [柯文哲野生官網](http://unlimited.kptaipei.tw/) 申請 API key 之後，換成自己的API Key <https://github.com/blackbing/react-kp-api-sample/blob/master/app.js#L5>。
 
 與 [Will 保哥] 聯絡
 ---------
