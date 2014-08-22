@@ -16,26 +16,32 @@ var Article = React.createClass({
       articles: []
     }
   },
+  getArticle: function(idx){
+    return this.state.articles[idx] || null;
+  },
   componentDidMount: function(){
     var _this = this;
     var id = this.props.id;
     API.getCategory(id).done( function(response){
-      console.log(response);
       _this.setState({articles: response.data});
+      if( !content.state.content){
+        content.setState(response.data[0]);
+      }
 
     });
   },
   clickOnArticle: function(event){
-    console.log(event.target);
     $target = $(event.target);
-    console.log($target.data('id'));
+    var idx = $target.data('idx');
+    var article = ( this.getArticle( idx));
+    content.setState( article );
   },
   render: function(){
     var _this = this;
     var items = {};
-    this.state.articles.forEach( function(item,id){
+    this.state.articles.forEach( function(item,idx){
       var id = item.id;
-      items['article_'+id] = <li className="article" data-id={id} onClick={_this.clickOnArticle}>{item.title}</li>;
+      items['article_'+id] = <li className="article" data-idx={idx} onClick={_this.clickOnArticle}>{item.title}</li>;
     });
     return <ul className='articles'>{items}</ul>;
   }
@@ -50,7 +56,6 @@ var Category = React.createClass({
   componentDidMount: function(){
     var _this = this;
     API.getCategory().done( function(response){
-      console.log(response);
       _this.setState({categories: response.data});
     });
   },
@@ -65,6 +70,22 @@ var Category = React.createClass({
   }
 });
 
+var Content = React.createClass({
+  getInitialState: function(){
+    return {
+      title: '請選擇文章',
+      content: ''
+    }
+  },
+  render: function(){
+    return <div>
+      <h2>{this.state.title}</h2>
+      <div dangerouslySetInnerHTML={{__html: this.state.content}}></div>
+    </div>;
+  }
+});
+
 
 
 React.renderComponent( <Category />, document.getElementById('categoryContainer'));
+var content = React.renderComponent( <Content />, document.getElementById('content'));
