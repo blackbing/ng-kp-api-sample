@@ -2,7 +2,7 @@
  * @jsx React.DOM
  */
 var API= {
-  KEY:"kp53f6c3de743a16.84028342",
+  KEY:"kp53f77ea99833c2.17206777",
   SERVER:"http://api.kptaipei.tw/v1/",
   getCategory: function(id){
     id = id?id:'';
