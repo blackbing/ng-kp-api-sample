@@ -24,7 +24,7 @@ var Article = React.createClass({
     var id = this.props.id;
     API.getCategory(id).done( function(response){
       _this.setState({articles: response.data});
-      if( !content.state.content){
+      if( !content.state.title){
         content.setState(response.data[0]);
       }
 
@@ -70,16 +70,34 @@ var Category = React.createClass({
   }
 });
 
+var Loading = React.createClass({
+  mixin: [React.addons.PureRenderMixin],
+  render: function(){
+    if( this.props.show)
+      return <div className="spinner">
+        <div className="rect1"></div>
+        <div className="rect2"></div>
+        <div className="rect3"></div>
+        <div className="rect4"></div>
+        <div className="rect5"></div>
+      </div>;
+    else
+      return <div/>
+  }
+
+});
+
 var Content = React.createClass({
   getInitialState: function(){
     return {
-      title: '請選擇文章',
+      title: '',
       content: ''
     }
   },
   render: function(){
     return <div>
       <h2>{this.state.title}</h2>
+      <Loading show={!this.state.title}/>
       <div dangerouslySetInnerHTML={{__html: this.state.content}}></div>
     </div>;
   }
